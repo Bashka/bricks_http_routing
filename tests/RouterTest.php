@@ -52,7 +52,6 @@ class RouterTest extends \PHPUnit_Framework_TestCase{
     $this->router->run($this->request, $this->response);
   }
 
-
   /**
    * Должен выполнять роутинг запроса с картой ALL.
    */
