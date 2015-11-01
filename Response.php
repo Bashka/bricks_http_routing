@@ -2,20 +2,17 @@
 namespace Bricks\Http\Routing;
 
 /**
- * HTTP-ответ.
+ * Представляет HTTP-ответ.
  *
- * Пример формирования ответа:
- *   $response = new Response;
- *   $response->header('Connection', 'close');
- *   $response->cookie('name', 'my name');
- *   $response->body('Hello world');
- *   $response->send();
+ * Ответ будет передан клиенту в момент вызова метода send, а не в процессе его 
+ * формирования. Это позволяет сформировать тело ответа прежде чем будут 
+ * сформирован заголовок.
  *
  * @author Artur Sh. Mamedbekov
  */
 class Response{
   /**
-   * @var int Код ответа.
+   * @var int Код ответа (на пример 200, 404, 500 и т.д.).
    */
   private $code;
 
@@ -25,7 +22,7 @@ class Response{
   private $header;
 
   /**
-   * @var array Устанавливаемые cookie.
+   * @var array Устанавливаемые ответом cookie.
    */
   private $cookie;
 
@@ -42,16 +39,16 @@ class Response{
   }
 
   /**
-   * Установка кода ответа.
+   * Устанавливает код ответа.
    *
-   * @param int $code Код ответа.
+   * @param int $code Код ответа (на пример 200, 404, 500 и т.д.).
    */
   public function code($code){
     $this->code = $code;
   }
 
   /**
-   * Установка параметра заголовка ответа.
+   * Устанавливает параметр заголовка ответа.
    *
    * @param string $param Имя целевого параметра.
    * @param string $value Устанавливаемое значение.
@@ -61,7 +58,7 @@ class Response{
   }
 
   /**
-   * Выполнить перенаправление на указанную страницу.
+   * Перенаправляет клиента.
    *
    * @param string $url Целевой URL.
    */
@@ -70,7 +67,7 @@ class Response{
   }
 
   /**
-   * Установка параметра cookie.
+   * Устанавливает параметр cookie.
    *
    * @param string $param Имя целевого параметра.
    * @param string $value Устанавливаемое значение. Если в качестве данного 
@@ -87,7 +84,7 @@ class Response{
   }
 
   /**
-   * Добавление значение в конец тела ответа.
+   * Добавляет значение в конец тела ответа.
    *
    * @param string $value Добавляемая строка.
    */
@@ -96,7 +93,8 @@ class Response{
   }
 
   /**
-   * Добавление данных в виде JSON строки в конец тела ответа.
+   * Добавляет данных в конец тела ответа предварительно сериализуя их как JSON 
+   * строку.
    *
    * @param mixed $value Добавляемые данные.
    */
@@ -105,7 +103,10 @@ class Response{
   }
 
   /**
-   * Передача ответа клиенту.
+   * Передает ответ клиенту.
+   *
+   * @warning Вызов этого метода передает все параметры ответа в Web-сервер.  
+   * Рекомендуется не передавать других параметров после его вызова.
    */
   public function send(){
     http_response_code($this->code);
@@ -118,6 +119,6 @@ class Response{
       setcookie($param, $options['value'], $options['time']);
     }
 
-    print($this->body);
+    file_put_contents('php://output', $this->body);
   }
 }
