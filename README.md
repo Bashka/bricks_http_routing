@@ -35,7 +35,7 @@
 
 [composer.json]: ./composer.json
 [Composer]: http://getcomposer.org/
-[исходные коды]: https://github.com/Bashka/bricks_cli_routing/releases
+[исходные коды]: https://github.com/Bashka/bricks_http_routing/releases
 [PHPUnit]: http://phpunit.de/
-[обсуждение]: https://github.com/Bashka/bricks_cli_routing/issues
+[обсуждение]: https://github.com/Bashka/bricks_http_routing/issues
 [Doxygen]: http://www.stack.nl/~dimitri/doxygen/index.html
