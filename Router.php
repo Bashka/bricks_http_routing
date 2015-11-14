@@ -1,8 +1,5 @@
 <?php
 namespace Bricks\Http\Routing;
-require_once(__DIR__ . '/Request.php');
-require_once(__DIR__ . '/Response.php');
-require_once(__DIR__ . '/RoutingException.php');
 
 /**
  * Объекты класса маршрутизируют HTTP-запросы к функциям и методам обработчикам.
