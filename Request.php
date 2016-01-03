@@ -62,7 +62,7 @@ class Request{
     $this->cookies = $_COOKIE;
 
     if($this->method() == 'GET'){
-      $this->input = $_SERVER['QUERY_STRING'];
+      $this->input = isset($_SERVER['QUERY_STRING'])? $_SERVER['QUERY_STRING'] : '';
     }
     else{
       $this->input = file_get_contents('php://input');
