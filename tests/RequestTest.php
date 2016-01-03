@@ -15,6 +15,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase{
     $_SERVER['REQUEST_METHOD'] = 'GET';
     $_SERVER['REQUEST_URI'] = '/script.php';
     $_SERVER['HTTP_CONTENT_TYPE'] = 'text/html';
+    $_SERVER['QUERY_STRING'] = 'param1=123&param2=test';
     $_COOKIE = ['var' => 'test'];
 
     $this->request = new Request;

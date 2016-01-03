@@ -61,7 +61,12 @@ class Request{
 
     $this->cookies = $_COOKIE;
 
-    $this->input = file_get_contents('php://input');
+    if($this->method() == 'GET'){
+      $this->input = $_SERVER['QUERY_STRING'];
+    }
+    else{
+      $this->input = file_get_contents('php://input');
+    }
   }
 
   /**
