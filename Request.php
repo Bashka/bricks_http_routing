@@ -22,6 +22,11 @@ class Request{
   private $path;
 
   /**
+   * @var string IP адрес пользователя.
+   */
+  private $ip;
+
+  /**
    * @var array Ассоциативный массив параметров заголовка запроса.
    */
   private $headers;
@@ -46,6 +51,7 @@ class Request{
   public function __construct(){
     $this->method = $_SERVER['REQUEST_METHOD'];
     $this->path = $_SERVER['REQUEST_URI'];
+    $this->ip = $_SERVER['REMOTE_ADDR'];
 
     if(!function_exists('getallheaders')){
       $this->headers = []; 
@@ -85,6 +91,15 @@ class Request{
    */
   public function path(){
     return $this->path;
+  }
+
+  /**
+   * Получает IP адрес пользователя.
+   *
+   * @return string IP адрес пользователя.
+   */
+  public function ip(){
+    return $this->ip;
   }
 
   /**

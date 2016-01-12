@@ -14,6 +14,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase{
 	public function setUp(){
     $_SERVER['REQUEST_METHOD'] = 'GET';
     $_SERVER['REQUEST_URI'] = '/script.php';
+    $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
     $_SERVER['HTTP_CONTENT_TYPE'] = 'text/html';
     $_SERVER['QUERY_STRING'] = 'param1=123&param2=test';
     $_COOKIE = ['var' => 'test'];
@@ -33,6 +34,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase{
    */
   public function testPath(){
     $this->assertEquals('/script.php', $this->request->path());
+  }
+
+  public function testIp(){
+    $this->assertEquals('127.0.0.1', $this->request->ip());
   }
 
   /**
